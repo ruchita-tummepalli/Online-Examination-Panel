@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-field {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.exam-table {
+  width: 100%;
+}

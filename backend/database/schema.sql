@@ -1,0 +1,38 @@
+-- Create database tables for Online Examination Panel
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE students (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  roll_number VARCHAR(20) UNIQUE NOT NULL,
+  class_name VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE exams (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  subject VARCHAR(100) NOT NULL,
+  date DATE NOT NULL,
+  duration INTEGER NOT NULL,
+  total_marks INTEGER NOT NULL,
+  teacher_id INTEGER REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE marks (
+  id SERIAL PRIMARY KEY,
+  exam_id INTEGER REFERENCES exams(id) ON DELETE CASCADE,
+  student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+  marks_obtained INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(exam_id, student_id)
+);

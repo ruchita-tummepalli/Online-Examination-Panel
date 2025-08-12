@@ -1,0 +1,44 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+  
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-number">{{stats.totalExams}}</div>
+        <div class="stat-label">Total Exams</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-number">{{stats.totalStudents}}</div>
+        <div class="stat-label">Total Students</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-number">{{stats.totalMarks}}</div>
+        <div class="stat-label">Marks Recorded</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" routerLink="/exams">
+        <mat-icon>assignment</mat-icon>
+        Manage Exams
+      </button>
+      <button mat-raised-button color="accent" routerLink="/students">
+        <mat-icon>people</mat-icon>
+        Manage Students
+      </button>
+      <button mat-raised-button color="warn" routerLink="/marks">
+        <mat-icon>grade</mat-icon>
+        Record Marks
+      </button>
+    </div>
+  </div>
+</div>

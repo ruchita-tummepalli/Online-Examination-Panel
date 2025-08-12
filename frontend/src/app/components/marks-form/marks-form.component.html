@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>{{isEdit ? 'Edit Marks' : 'Record Marks'}}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="marksForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Exam</mat-label>
+      <mat-select formControlName="exam_id">
+        <mat-option *ngFor="let exam of exams" [value]="exam.id">
+          {{exam.title}} - {{exam.date | date}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="marksForm.get('exam_id')?.hasError('required')">Exam is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Student</mat-label>
+      <mat-select formControlName="student_id">
+        <mat-option *ngFor="let student of students" [value]="student.id">
+          {{student.name}} - {{student.email}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="marksForm.get('student_id')?.hasError('required')">Student is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Marks Obtained</mat-label>
+      <input matInput type="number" formControlName="marks">
+      <mat-error *ngIf="marksForm.get('marks')?.hasError('required')">Marks is required</mat-error>
+      <mat-error *ngIf="marksForm.get('marks')?.hasError('min')">Marks cannot be negative</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Total Marks</mat-label>
+      <input matInput type="number" formControlName="total_marks">
+      <mat-error *ngIf="marksForm.get('total_marks')?.hasError('required')">Total marks is required</mat-error>
+      <mat-error *ngIf="marksForm.get('total_marks')?.hasError('min')">Total marks must be at least 1</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!marksForm.valid">
+    {{isEdit ? 'Update' : 'Record'}}
+  </button>
+</mat-dialog-actions>
